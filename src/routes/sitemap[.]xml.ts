@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 
-const BASE_URL = "https://id-preview--9c793755-ffba-4054-8516-e134d2404eee.lovable.app";
+const BASE_URL = "https://www.soldbysharon.co.ke";
 
 interface SitemapEntry {
   path: string;
@@ -13,7 +13,19 @@ export const Route = createFileRoute("/sitemap.xml")({
   server: {
     handlers: {
       GET: async () => {
-        const entries: SitemapEntry[] = [{ path: "/", changefreq: "weekly", priority: "1.0" }];
+        const entries: SitemapEntry[] = [
+          { path: "/", changefreq: "weekly", priority: "1.0" },
+          { path: "/about", changefreq: "monthly", priority: "0.8" },
+          { path: "/services", changefreq: "monthly", priority: "0.8" },
+          { path: "/areas", changefreq: "monthly", priority: "0.8" },
+          { path: "/properties", changefreq: "weekly", priority: "0.9" },
+          { path: "/properties/karen-family-villa", changefreq: "weekly", priority: "0.7" },
+          { path: "/properties/westlands-office", changefreq: "weekly", priority: "0.7" },
+          { path: "/properties/kitengela-residential-plot", changefreq: "weekly", priority: "0.7" },
+          { path: "/properties/mombasa-road-development-land", changefreq: "weekly", priority: "0.7" },
+          { path: "/founder", changefreq: "monthly", priority: "0.7" },
+          { path: "/contact", changefreq: "monthly", priority: "0.7" },
+        ];
 
         const urls = entries.map((e) =>
           [
