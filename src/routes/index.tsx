@@ -26,8 +26,6 @@ import {
   MessageCircle,
 } from "lucide-react";
 
-import logoAsset from "@/assets/soldbysharon-logo.png.asset.json";
-
 export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
@@ -229,7 +227,7 @@ function Index() {
             : "bg-primary/40 backdrop-blur-sm"
         }`}
       >
-        <div className="w-full max-w-7xl mx-auto px-6 lg:px-10 flex h-20 items-center justify-between text-primary-foreground">
+        <div className="w-full max-w-7xl mx-auto px-6 lg:px-10 flex h-24 items-center justify-between text-primary-foreground">
           <nav className="hidden items-center gap-8 md:flex">
             {navLinks.slice(0, 3).map((link) => (
               <a
@@ -244,22 +242,15 @@ function Index() {
 
           <a
             href="#"
-            className="flex flex-col items-center leading-none md:absolute md:left-1/2 md:-translate-x-1/2"
+            className="flex items-center md:absolute md:left-1/2 md:-translate-x-1/2"
           >
-            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-background p-0.5">
-              <img
-                src={logoAsset.url}
-                alt="SoldBySharon logo"
-                className="h-full w-full object-contain"
-              />
-            </span>
-            <span className="font-display text-lg font-normal italic tracking-[0.18em] text-primary-foreground">
-              SoldBySharon
-            </span>
-            <span className="mt-1 h-px w-16 bg-accent" />
-            <span className="mt-1 text-[9px] font-medium uppercase tracking-[0.35em] text-primary-foreground/70">
-              Properties
-            </span>
+            <img
+              src="/logo.jpg"
+              alt="Sold by Sharon"
+              width={512}
+              height={512}
+              className="h-16 w-16 rounded-md bg-white object-contain sm:h-20 sm:w-20"
+            />
           </a>
 
           <nav className="hidden items-center gap-8 md:flex">
@@ -312,7 +303,7 @@ function Index() {
       </header>
 
       {/* Hero */}
-      <section className="relative flex min-h-[92vh] items-center overflow-hidden pt-20">
+      <section className="relative flex min-h-[92vh] items-center overflow-hidden pt-24">
         <div className="absolute inset-0 z-0">
           <img
             src="/images/hero-estate.jpg"
@@ -822,17 +813,16 @@ function Index() {
       <footer className="border-t border-border bg-background py-12">
         <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
-            <div className="flex items-center gap-2">
+            <a href="#" className="flex items-center">
               <img
-                src={logoAsset.url}
-                alt="SoldBySharon logo"
-                className="h-10 w-auto"
+                src="/logo.jpg"
+                alt="Sold by Sharon"
+                width={512}
+                height={512}
+                className="h-24 w-24 object-contain"
                 loading="lazy"
               />
-              <span className="font-display text-xl font-semibold tracking-tight text-foreground">
-                SoldBySharon
-              </span>
-            </div>
+            </a>
             <nav className="flex flex-wrap justify-center gap-6">
               {navLinks.map((link) => (
                 <a
