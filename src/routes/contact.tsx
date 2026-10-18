@@ -51,7 +51,35 @@ function ContactPage() {
               <dd className="mt-2 font-display text-2xl font-normal text-neutral-950">Nairobi, Kenya</dd>
             </div>
           </dl>
-          <form className="space-y-4 bg-white p-6 md:p-8" onSubmit={(event) => event.preventDefault()}>
+          <form
+            className="space-y-4 bg-white p-6 md:p-8"
+            onSubmit={(event) => {
+              event.preventDefault();
+              const data = new FormData(event.currentTarget);
+              const name = String(data.get("name") ?? "");
+              const email = String(data.get("email") ?? "");
+              const phone = String(data.get("phone") ?? "");
+              const interest = String(data.get("interest") ?? "");
+              const budget = String(data.get("budget") ?? "");
+              const viewing = data.get("viewing") === "yes";
+              const message = String(data.get("message") ?? "");
+              const subject = property ? `Enquiry: ${property.title}` : `Enquiry: ${interest}`;
+              const body = [
+                `Name: ${name}`,
+                `Email: ${email}`,
+                phone ? `Phone: ${phone}` : "",
+                `Interest: ${interest}`,
+                budget ? `Budget: ${budget}` : "",
+                viewing ? "Viewing requested: yes" : "",
+                property ? `Property: ${property.title} (${property.area})` : "",
+                "",
+                message,
+              ]
+                .filter((line) => line !== "")
+                .join("\n");
+              window.location.href = `mailto:info@soldbysharon.co.ke?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            }}
+          >
             {property ? (
               <p className="text-sm text-neutral-600">
                 You are asking about <span className="text-neutral-950">{property.title}</span>.
@@ -68,13 +96,26 @@ function ContactPage() {
               </label>
             </div>
             <label className="block text-sm">
+              <span className="mb-2 block text-neutral-600">Phone</span>
+              <input id="phone" name="phone" type="tel" className={fieldClass} />
+            </label>
+            <label className="block text-sm">
               <span className="mb-2 block text-neutral-600">I am interested in</span>
               <select id="interest" name="interest" className={fieldClass} defaultValue="Buying a property">
                 <option>Buying a property</option>
+                <option>A viewing</option>
                 <option>Property management</option>
                 <option>Development support</option>
                 <option>General advisory</option>
               </select>
+            </label>
+            <label className="block text-sm">
+              <span className="mb-2 block text-neutral-600">Budget</span>
+              <input id="budget" name="budget" type="text" placeholder="Optional" className={fieldClass} />
+            </label>
+            <label className="flex items-center gap-3 text-sm text-neutral-700">
+              <input name="viewing" value="yes" type="checkbox" className="h-4 w-4" defaultChecked={Boolean(property)} />
+              I would like to arrange a viewing
             </label>
             <label className="block text-sm">
               <span className="mb-2 block text-neutral-600">Message</span>
@@ -96,6 +137,9 @@ function ContactPage() {
             >
               Send message
             </button>
+            <p className="text-sm leading-relaxed text-neutral-600">
+              Send message opens an email to info@soldbysharon.co.ke with what you have written.
+            </p>
           </form>
         </div>
       </section>

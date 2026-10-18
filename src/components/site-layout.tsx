@@ -1,6 +1,6 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState, type ReactNode } from "react";
-import { Menu, X } from "lucide-react";
+import { Instagram, Linkedin, Menu, X } from "lucide-react";
 
 export const navLinks = [
   { label: "Home", to: "/" },
@@ -18,6 +18,29 @@ function isCurrent(pathname: string, to: NavTo) {
   if (to === "/properties") return pathname.startsWith("/properties");
   return pathname === to;
 }
+
+function TikTokIcon({ className, strokeWidth = 1.5 }: { className?: string; strokeWidth?: number }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M9 12a4 4 0 1 0 4 4V4c.7 2.4 2.6 4 5 4" />
+    </svg>
+  );
+}
+
+const socialLinks = [
+  { label: "Instagram", href: "https://www.instagram.com/soldbysharon", icon: Instagram },
+  { label: "LinkedIn", href: "https://www.linkedin.com/company/soldbysharon", icon: Linkedin },
+  { label: "TikTok", href: "https://www.tiktok.com/@soldbysharon", icon: TikTokIcon },
+];
 
 export function SiteLayout({ children }: { children: ReactNode }) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -171,79 +194,84 @@ export function SiteLayout({ children }: { children: ReactNode }) {
 
       <main id="content">{children}</main>
 
-      <footer className="border-t border-neutral-200 bg-white px-6 py-16 md:px-10">
-        <div className="mx-auto grid max-w-6xl gap-10 sm:grid-cols-2 lg:grid-cols-4">
-          <div>
-            <img src="/logo.jpg" alt="Sold by Sharon" className="h-20 w-20 object-contain" />
-            <p className="mt-4 text-sm text-neutral-600">Bringing you home, securely.</p>
+      <footer className="border-t border-neutral-200 bg-white px-5 py-12 sm:px-8 sm:py-16 md:px-10">
+        <div className="mx-auto grid max-w-6xl gap-10 sm:grid-cols-2 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)_minmax(0,1.3fr)] lg:gap-12">
+          <div className="min-w-0 sm:col-span-2 lg:col-span-1">
+            <img src="/logo.jpg" alt="Sold by Sharon" className="h-16 w-16 object-contain sm:h-20 sm:w-20" />
+            <ul className="mt-5 flex gap-2">
+              {socialLinks.map((social) => (
+                <li key={social.label}>
+                  <a
+                    href={social.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={social.label}
+                    className="inline-flex h-11 w-11 items-center justify-center border border-neutral-200 text-neutral-800 transition hover:border-neutral-950 hover:bg-neutral-950 hover:text-white"
+                  >
+                    <social.icon className="h-4 w-4" strokeWidth={1.5} />
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
-          <div>
+          <div className="min-w-0">
             <h2 className="text-[11px] font-medium uppercase tracking-[0.28em] text-neutral-500">
               Looking to
             </h2>
-            <ul className="mt-4 space-y-2 text-sm">
+            <ul className="mt-4 space-y-1 text-sm">
               <li>
-                <Link to="/properties" className="hover:underline">
+                <Link to="/properties" className="inline-flex py-1.5 hover:underline">
                   Buy property
                 </Link>
               </li>
               <li>
-                <Link to="/services" className="hover:underline">
+                <Link to="/services" className="inline-flex py-1.5 hover:underline">
                   Manage a property
                 </Link>
               </li>
               <li>
-                <Link to="/areas" className="hover:underline">
+                <Link to="/areas" className="inline-flex py-1.5 hover:underline">
                   Explore areas
                 </Link>
               </li>
               <li>
-                <Link to="/contact" search={{ property: undefined }} className="hover:underline">
+                <Link to="/saved" className="inline-flex py-1.5 hover:underline">
+                  Saved properties
+                </Link>
+              </li>
+              <li>
+                <Link to="/compare" className="inline-flex py-1.5 hover:underline">
+                  Compare properties
+                </Link>
+              </li>
+              <li>
+                <Link to="/contact" search={{ property: undefined }} className="inline-flex py-1.5 hover:underline">
                   Contact us
                 </Link>
               </li>
             </ul>
           </div>
-          <div>
-            <h2 className="text-[11px] font-medium uppercase tracking-[0.28em] text-neutral-500">
-              About
-            </h2>
-            <ul className="mt-4 space-y-2 text-sm">
-              {navLinks.map((link) => (
-                <li key={link.to}>
-                  <Link
-                    to={link.to}
-                    activeOptions={{ exact: true }}
-                    aria-current={isCurrent(pathname, link.to) ? "page" : undefined}
-                    className="hover:underline"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
+          <div className="min-w-0">
             <h2 className="text-[11px] font-medium uppercase tracking-[0.28em] text-neutral-500">
               Connect
             </h2>
-            <ul className="mt-4 space-y-2 text-sm text-neutral-700">
+            <ul className="mt-4 space-y-1 text-sm text-neutral-700">
               <li>
-                <a href="mailto:info@soldbysharon.co.ke" className="hover:underline">
+                <a href="mailto:info@soldbysharon.co.ke" className="inline-flex max-w-full py-1.5 break-all hover:underline">
                   info@soldbysharon.co.ke
                 </a>
               </li>
-              <li>+254 XXX XXX XXX</li>
-              <li>Nairobi, Kenya</li>
+              <li className="py-1.5">+254 XXX XXX XXX</li>
+              <li className="py-1.5">Nairobi, Kenya</li>
               <li>
-                <a href="https://www.soldbysharon.co.ke" className="hover:underline">
+                <a href="https://www.soldbysharon.co.ke" className="inline-flex max-w-full py-1.5 break-all hover:underline">
                   www.soldbysharon.co.ke
                 </a>
               </li>
             </ul>
           </div>
         </div>
-        <p className="mx-auto mt-12 max-w-6xl border-t border-neutral-200 pt-6 text-xs text-neutral-500">
+        <p className="mx-auto mt-10 max-w-6xl border-t border-neutral-200 pt-6 text-xs leading-relaxed text-neutral-500 sm:mt-12">
           © {new Date().getFullYear()} Sold by Sharon. All rights reserved.
         </p>
       </footer>

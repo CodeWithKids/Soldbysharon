@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageBanner, SiteLayout } from "@/components/site-layout";
+import { areaNames, areaSlug } from "@/lib/areas";
 import { pageMeta } from "@/lib/page-meta";
 
 export const Route = createFileRoute("/about")({
@@ -122,6 +123,42 @@ function AboutPage() {
                 <p className="mt-2 text-sm text-neutral-600">{value.description}</p>
               </li>
             ))}
+          </ul>
+        </div>
+      </section>
+
+      <section className="border-t border-neutral-200 bg-neutral-50 px-6 py-20 md:px-10 md:py-28">
+        <div className="mx-auto max-w-6xl">
+          <p className="text-[11px] font-medium uppercase tracking-[0.35em] text-neutral-500">
+            Areas We Cover
+          </p>
+          <h2 className="mt-4 font-display text-4xl font-normal sm:text-5xl">
+            All of Nairobi and Its Outskirts
+          </h2>
+          <p className="mt-4 max-w-2xl text-neutral-600">
+            From the heart of Nairobi to the fast-growing outskirts, SoldBySharon covers the full
+            property landscape—so you can invest wherever opportunity meets your goals.
+          </p>
+          <ul className="mt-10 flex flex-wrap gap-3">
+            {areaNames.map((area) => (
+              <li key={area}>
+                <Link
+                  to="/areas/$slug"
+                  params={{ slug: areaSlug(area) }}
+                  className="inline-block border border-neutral-200 bg-white px-4 py-2 font-display text-lg transition hover:border-neutral-950"
+                >
+                  {area}
+                </Link>
+              </li>
+            ))}
+            <li>
+              <Link
+                to="/areas"
+                className="inline-block border border-neutral-950 bg-neutral-950 px-4 py-2 font-display text-lg text-white"
+              >
+                And more
+              </Link>
+            </li>
           </ul>
         </div>
       </section>

@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
+import { areaNames, areaSlug } from "@/lib/areas";
+import { properties } from "@/lib/properties";
 
 const BASE_URL = "https://www.soldbysharon.co.ke";
 
@@ -19,10 +21,18 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/services", changefreq: "monthly", priority: "0.8" },
           { path: "/areas", changefreq: "monthly", priority: "0.8" },
           { path: "/properties", changefreq: "weekly", priority: "0.9" },
-          { path: "/properties/karen-family-villa", changefreq: "weekly", priority: "0.7" },
-          { path: "/properties/westlands-office", changefreq: "weekly", priority: "0.7" },
-          { path: "/properties/kitengela-residential-plot", changefreq: "weekly", priority: "0.7" },
-          { path: "/properties/mombasa-road-development-land", changefreq: "weekly", priority: "0.7" },
+          { path: "/saved", changefreq: "monthly", priority: "0.4" },
+          { path: "/compare", changefreq: "monthly", priority: "0.4" },
+          ...areaNames.map((area) => ({
+            path: `/areas/${areaSlug(area)}`,
+            changefreq: "weekly" as const,
+            priority: "0.7",
+          })),
+          ...properties.map((property) => ({
+            path: `/properties/${property.slug}`,
+            changefreq: "weekly" as const,
+            priority: "0.7",
+          })),
           { path: "/founder", changefreq: "monthly", priority: "0.7" },
           { path: "/contact", changefreq: "monthly", priority: "0.7" },
         ];

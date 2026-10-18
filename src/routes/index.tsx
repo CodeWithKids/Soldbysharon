@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Search } from "lucide-react";
 import { SiteLayout } from "@/components/site-layout";
-import { properties } from "@/lib/properties";
+import { getFeaturedProperties } from "@/lib/properties";
 
 export const Route = createFileRoute("/")({
   component: HomePage,
@@ -48,6 +48,34 @@ const highlights = [
   },
 ] as const;
 
+const reasons = [
+  { title: "Trust & Transparency", description: "Verified properties and clear processes" },
+  { title: "On-the-Ground Representation", description: "Your reliable partner in Kenya" },
+  { title: "End-to-End Service", description: "From purchase to management and beyond" },
+  { title: "Premium Market Access", description: "Curated, high-quality investment opportunities" },
+  { title: "Consistent Communication", description: "Regular updates, reports, and accountability" },
+  { title: "Peace of Mind", description: "We handle everything—so you don't have to" },
+];
+
+const steps = [
+  {
+    title: "Tell us what you need",
+    text: "Tell us what you are looking for. We reply with a clear next step, not a pile of listings.",
+  },
+  {
+    title: "We verify the property",
+    text: "High-quality, vetted homes, villas, townhouses, and land in prime locations.",
+  },
+  {
+    title: "We handle the purchase",
+    text: "We source and secure high-quality, vetted properties including luxury apartments, villas, townhouses, and land in prime locations—ensuring transparency and due diligence at every step.",
+  },
+  {
+    title: "We manage it while you are away",
+    text: "Inspections, maintenance, and reporting, as if the property were our own.",
+  },
+];
+
 function HomePage() {
   return (
     <SiteLayout>
@@ -63,8 +91,7 @@ function HomePage() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/45 via-black/35 to-black/45" />
 
         <div className="relative flex min-h-screen flex-col items-center justify-center px-6 pt-28 text-center text-white">
-          <p className="text-[11px] font-medium uppercase tracking-[0.55em] text-white/80">Presents</p>
-          <p className="mt-3 font-display text-4xl font-normal tracking-[0.18em] sm:text-5xl">KENYA</p>
+          <p className="font-display text-4xl font-normal tracking-[0.12em] sm:text-5xl">Sold by Sharon</p>
           <h1 className="mt-10 max-w-4xl text-balance font-display text-3xl font-normal leading-tight sm:text-5xl">
             Your trusted property partner in Kenya
           </h1>
@@ -126,7 +153,7 @@ function HomePage() {
             Open any property for the full details, then ask us about price, title, and a viewing.
           </p>
           <ul className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {properties.map((property) => (
+            {getFeaturedProperties().map((property) => (
               <li key={property.slug}>
                 <Link to="/properties/$slug" params={{ slug: property.slug }} className="group block">
                   <div className="overflow-hidden">
@@ -147,6 +174,77 @@ function HomePage() {
               </li>
             ))}
           </ul>
+        </div>
+      </section>
+
+      <section className="bg-white px-6 py-20 md:px-10 md:py-28">
+        <div className="mx-auto max-w-6xl">
+          <p className="text-[11px] font-medium uppercase tracking-[0.35em] text-neutral-500">
+            Why SoldBySharon
+          </p>
+          <h2 className="mt-4 max-w-3xl font-display text-4xl font-normal sm:text-5xl">
+            Why Diaspora Clients Choose Us
+          </h2>
+          <ul className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {reasons.map((reason) => (
+              <li key={reason.title} className="border border-neutral-200 p-6">
+                <h3 className="font-display text-2xl font-normal">{reason.title}</h3>
+                <p className="mt-2 text-sm text-neutral-600">{reason.description}</p>
+              </li>
+            ))}
+          </ul>
+          <Link to="/about" className="mt-10 inline-block text-sm uppercase tracking-[0.22em] underline">
+            Read about us
+          </Link>
+        </div>
+      </section>
+
+      <section className="bg-neutral-50 px-6 py-20 md:px-10 md:py-28">
+        <div className="mx-auto max-w-6xl">
+          <p className="text-[11px] font-medium uppercase tracking-[0.35em] text-neutral-500">
+            Core Services
+          </p>
+          <h2 className="mt-4 font-display text-4xl font-normal sm:text-5xl">
+            Everything You Need to Invest with Confidence
+          </h2>
+          <ol className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            {steps.map((step, index) => (
+              <li key={step.title} className="border border-neutral-200 bg-white p-6">
+                <p className="text-[11px] font-medium tracking-[0.28em] text-neutral-400">
+                  {String(index + 1).padStart(2, "0")}
+                </p>
+                <h3 className="mt-4 font-display text-2xl font-normal">{step.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-neutral-600">{step.text}</p>
+              </li>
+            ))}
+          </ol>
+          <Link
+            to="/contact"
+            search={{ property: undefined }}
+            className="mt-10 inline-block text-sm uppercase tracking-[0.22em] underline"
+          >
+            Tell us what you need
+          </Link>
+        </div>
+      </section>
+
+      <section className="border-t border-neutral-200 bg-neutral-50 px-6 py-20 md:px-10 md:py-28">
+        <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
+          <div>
+            <p className="text-[11px] font-medium uppercase tracking-[0.35em] text-neutral-500">Founder</p>
+            <h2 className="mt-4 font-display text-4xl font-normal leading-tight sm:text-5xl">
+              Sharon — Founder & Lead Property Advisor
+            </h2>
+          </div>
+          <div>
+            <p className="text-neutral-600">
+              Sharon is a seasoned real estate professional with over 10 years of experience across
+              property sales, advisory, and real estate development.
+            </p>
+            <Link to="/founder" className="mt-6 inline-block text-sm uppercase tracking-[0.22em] underline">
+              Meet Sharon
+            </Link>
+          </div>
         </div>
       </section>
 

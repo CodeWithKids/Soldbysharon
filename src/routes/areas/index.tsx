@@ -1,8 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageBanner, SiteLayout } from "@/components/site-layout";
+import { areaSlug, propertyCategories } from "@/lib/areas";
 import { pageMeta } from "@/lib/page-meta";
 
-export const Route = createFileRoute("/areas")({
+export const Route = createFileRoute("/areas/")({
   component: AreasPage,
   head: () =>
     pageMeta(
@@ -12,77 +13,7 @@ export const Route = createFileRoute("/areas")({
     ),
 });
 
-const categories = [
-  {
-    id: "residential",
-    index: "01",
-    title: "Mid to High-End Residential",
-    description:
-      "Premium apartments, villas, townhouses, and family homes in Nairobi's most sought-after neighborhoods.",
-    image: "/images/areas-residential.jpg",
-    imageAlt: "A villa with a terracotta roof and garden at sunset",
-    propertySlug: "karen-family-villa",
-    areas: [
-      "Kilimani",
-      "Lavington",
-      "Kileleshwa",
-      "Riverside",
-      "Karen",
-      "Runda",
-      "Kitisuru",
-      "Westlands",
-      "Parklands",
-      "Muthaiga",
-      "Spring Valley",
-      "Loresho",
-      "Rosslyn",
-      "Gigiri",
-    ],
-  },
-  {
-    id: "commercial",
-    index: "02",
-    title: "Commercial Properties",
-    description: "Office spaces, retail units, and mixed-use developments for investors and businesses.",
-    image: "/images/areas-commercial.jpg",
-    imageAlt: "A glass office building on a tree-lined street",
-    propertySlug: "westlands-office",
-    areas: ["Upper Hill", "Westlands", "Kilimani", "Parklands", "Mombasa Road"],
-  },
-  {
-    id: "residential-land",
-    index: "03",
-    title: "Residential Land",
-    description:
-      "Verified plots in prime and emerging suburbs—ideal for building your dream home or long-term investment.",
-    image: "/images/areas-residential-land.jpg",
-    imageAlt: "An open residential plot with acacia trees and red soil",
-    propertySlug: "kitengela-residential-plot",
-    areas: [
-      "Karen",
-      "Runda",
-      "Muthaiga",
-      "Kiambu Road",
-      "Syokimau",
-      "Kitengela",
-      "Rongai",
-      "Thika Road",
-      "Athi River",
-      "Embakasi",
-    ],
-  },
-  {
-    id: "commercial-land",
-    index: "04",
-    title: "Commercial Land",
-    description:
-      "Strategically located parcels for development, income-generating projects, and portfolio growth.",
-    image: "/images/areas-commercial-land.jpg",
-    imageAlt: "Open land beside a highway, with a distant city skyline",
-    propertySlug: "mombasa-road-development-land",
-    areas: ["Mombasa Road", "Athi River", "Thika Road", "Embakasi", "Kitengela", "Syokimau", "Upper Hill"],
-  },
-];
+const categories = propertyCategories;
 
 function AreasPage() {
   return (
@@ -151,7 +82,9 @@ function AreasPage() {
               <ul className="mt-8 grid grid-cols-2 gap-x-8">
                 {category.areas.map((area) => (
                   <li key={area} className="border-b border-neutral-200 py-3 font-display text-lg font-normal">
-                    {area}
+                    <Link to="/areas/$slug" params={{ slug: areaSlug(area) }} className="hover:underline">
+                      {area}
+                    </Link>
                   </li>
                 ))}
               </ul>

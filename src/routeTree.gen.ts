@@ -11,13 +11,17 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
-import { Route as AreasRouteImport } from './routes/areas'
+import { Route as CompareRouteImport } from './routes/compare'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as FounderRouteImport } from './routes/founder'
+import { Route as SavedRouteImport } from './routes/saved'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as AreasIndexRouteImport } from './routes/areas/index'
+import { Route as AreasSlugRouteImport } from './routes/areas/$slug'
 import { Route as PropertiesIndexRouteImport } from './routes/properties/index'
 import { Route as PropertiesSlugRouteImport } from './routes/properties/$slug'
+import { Route as AreasSlugCategoryRouteImport } from './routes/areas_.$slug.$category'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -29,9 +33,9 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AreasRoute = AreasRouteImport.update({
-  id: '/areas',
-  path: '/areas',
+const CompareRoute = CompareRouteImport.update({
+  id: '/compare',
+  path: '/compare',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -44,6 +48,11 @@ const FounderRoute = FounderRouteImport.update({
   path: '/founder',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SavedRoute = SavedRouteImport.update({
+  id: '/saved',
+  path: '/saved',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ServicesRoute = ServicesRouteImport.update({
   id: '/services',
   path: '/services',
@@ -52,6 +61,16 @@ const ServicesRoute = ServicesRouteImport.update({
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AreasIndexRoute = AreasIndexRouteImport.update({
+  id: '/areas/',
+  path: '/areas/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AreasSlugRoute = AreasSlugRouteImport.update({
+  id: '/areas/$slug',
+  path: '/areas/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PropertiesIndexRoute = PropertiesIndexRouteImport.update({
@@ -64,87 +83,120 @@ const PropertiesSlugRoute = PropertiesSlugRouteImport.update({
   path: '/properties/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AreasSlugCategoryRoute = AreasSlugCategoryRouteImport.update({
+  id: '/areas_/$slug/$category',
+  path: '/areas/$slug/$category',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/areas': typeof AreasRoute
+  '/compare': typeof CompareRoute
   '/contact': typeof ContactRoute
   '/founder': typeof FounderRoute
+  '/saved': typeof SavedRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/areas/$slug': typeof AreasSlugRoute
   '/properties/$slug': typeof PropertiesSlugRoute
+  '/areas/': typeof AreasIndexRoute
   '/properties/': typeof PropertiesIndexRoute
+  '/areas/$slug/$category': typeof AreasSlugCategoryRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/areas': typeof AreasRoute
+  '/compare': typeof CompareRoute
   '/contact': typeof ContactRoute
   '/founder': typeof FounderRoute
+  '/saved': typeof SavedRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/areas/$slug': typeof AreasSlugRoute
   '/properties/$slug': typeof PropertiesSlugRoute
+  '/areas': typeof AreasIndexRoute
   '/properties': typeof PropertiesIndexRoute
+  '/areas/$slug/$category': typeof AreasSlugCategoryRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/areas': typeof AreasRoute
+  '/compare': typeof CompareRoute
   '/contact': typeof ContactRoute
   '/founder': typeof FounderRoute
+  '/saved': typeof SavedRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/areas/$slug': typeof AreasSlugRoute
   '/properties/$slug': typeof PropertiesSlugRoute
+  '/areas/': typeof AreasIndexRoute
   '/properties/': typeof PropertiesIndexRoute
+  '/areas_/$slug/$category': typeof AreasSlugCategoryRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/about'
-    | '/areas'
+    | '/compare'
     | '/contact'
     | '/founder'
+    | '/saved'
     | '/services'
     | '/sitemap.xml'
+    | '/areas/$slug'
     | '/properties/$slug'
+    | '/areas/'
     | '/properties/'
+    | '/areas/$slug/$category'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
-    | '/areas'
+    | '/compare'
     | '/contact'
     | '/founder'
+    | '/saved'
     | '/services'
     | '/sitemap.xml'
+    | '/areas/$slug'
     | '/properties/$slug'
+    | '/areas'
     | '/properties'
+    | '/areas/$slug/$category'
   id:
     | '__root__'
     | '/'
     | '/about'
-    | '/areas'
+    | '/compare'
     | '/contact'
     | '/founder'
+    | '/saved'
     | '/services'
     | '/sitemap.xml'
+    | '/areas/$slug'
     | '/properties/$slug'
+    | '/areas/'
     | '/properties/'
+    | '/areas_/$slug/$category'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
-  AreasRoute: typeof AreasRoute
+  CompareRoute: typeof CompareRoute
   ContactRoute: typeof ContactRoute
   FounderRoute: typeof FounderRoute
+  SavedRoute: typeof SavedRoute
   ServicesRoute: typeof ServicesRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  AreasSlugRoute: typeof AreasSlugRoute
   PropertiesSlugRoute: typeof PropertiesSlugRoute
+  AreasIndexRoute: typeof AreasIndexRoute
   PropertiesIndexRoute: typeof PropertiesIndexRoute
+  AreasSlugCategoryRoute: typeof AreasSlugCategoryRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -163,11 +215,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/areas': {
-      id: '/areas'
-      path: '/areas'
-      fullPath: '/areas'
-      preLoaderRoute: typeof AreasRouteImport
+    '/compare': {
+      id: '/compare'
+      path: '/compare'
+      fullPath: '/compare'
+      preLoaderRoute: typeof CompareRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -184,6 +236,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FounderRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/saved': {
+      id: '/saved'
+      path: '/saved'
+      fullPath: '/saved'
+      preLoaderRoute: typeof SavedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/services': {
       id: '/services'
       path: '/services'
@@ -196,6 +255,20 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/areas/': {
+      id: '/areas/'
+      path: '/areas'
+      fullPath: '/areas/'
+      preLoaderRoute: typeof AreasIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/areas/$slug': {
+      id: '/areas/$slug'
+      path: '/areas/$slug'
+      fullPath: '/areas/$slug'
+      preLoaderRoute: typeof AreasSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/properties/': {
@@ -212,19 +285,30 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PropertiesSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/areas_/$slug/$category': {
+      id: '/areas_/$slug/$category'
+      path: '/areas/$slug/$category'
+      fullPath: '/areas/$slug/$category'
+      preLoaderRoute: typeof AreasSlugCategoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
-  AreasRoute: AreasRoute,
+  CompareRoute: CompareRoute,
   ContactRoute: ContactRoute,
   FounderRoute: FounderRoute,
+  SavedRoute: SavedRoute,
   ServicesRoute: ServicesRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  AreasSlugRoute: AreasSlugRoute,
   PropertiesSlugRoute: PropertiesSlugRoute,
+  AreasIndexRoute: AreasIndexRoute,
   PropertiesIndexRoute: PropertiesIndexRoute,
+  AreasSlugCategoryRoute: AreasSlugCategoryRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
